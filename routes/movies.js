@@ -26,7 +26,7 @@ router.post('/movies/create', (req, res ,next)=>{
       res.redirect('/movies')
     }).catch((err) => {
       console.log(err)
-     res.redirect('movies/new-movie')
+     res.render('movies/new-movie')
     });
     console.log(cast)
    })
@@ -61,9 +61,21 @@ router.post('/movies/create', (req, res ,next)=>{
    })
 
 
+//UPDATE--GET--
+router.get('/movies/:id/edit', (req, res, next) => {
+  // Iteration #4: Update the drone
+  const { id } = req.params
+ 
+  MoviesModel.findById(id)
+  .then((movie) => {
+   res.render('movies/edit-movie.hbs', {movie})
+  })
+  .catch((err) => {
+   console.log(err) 
+  });
+});
 
-
-
+//DELETE
 router.post('/movies/:id/delete', (req, res, next)=>{
 
   const {id} = req.params
