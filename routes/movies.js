@@ -8,7 +8,7 @@ const CelebritiesModel = require('../models/Celebrity.model')
 //--CREATE- Movie using celebrity Model to grab cast Array
 router.get('/movies/create', (req, res, next)=>{
  //grabbing data from the Celebrity Model
- 
+
   CelebritiesModel.find()
  .then((cast) => {
   res.render('movies/new-movie.hbs', { cast })
@@ -64,7 +64,7 @@ router.post('/movies/create', (req, res ,next)=>{
    })
 
 
-//UPDATE--GET--
+//***UPDATE--GET--
 router.get('/movies/:id/edit', (req, res, next) => {
   // Iteration #4: Update the drone
   const { id } = req.params
@@ -77,6 +77,7 @@ router.get('/movies/:id/edit', (req, res, next) => {
    console.log(err) 
   });
 });
+
 
 //POST--DELETE
 router.post('/movies/:id/delete', (req, res, next)=>{
