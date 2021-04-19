@@ -1,11 +1,14 @@
 const router = require("express").Router();
 
 const MoviesModel = require('../models/movies.model')
+
+//Require celebrity Model
 const CelebritiesModel = require('../models/Celebrity.model')
 
-
+//--CREATE- Movie using celebrity Model to grab cast Array
 router.get('/movies/create', (req, res, next)=>{
-
+ //grabbing data from the Celebrity Model
+ 
   CelebritiesModel.find()
  .then((cast) => {
   res.render('movies/new-movie.hbs', { cast })
@@ -15,7 +18,7 @@ router.get('/movies/create', (req, res, next)=>{
 
 })
 
-//POST
+//POST__userinput to create movie
 router.post('/movies/create', (req, res ,next)=>{
     //grab user input
     const {title, genre, plot, cast} = req.body
@@ -31,7 +34,7 @@ router.post('/movies/create', (req, res ,next)=>{
     console.log(cast)
    })
 
- //movies-list
+ //GET-- movies-list
  router.get('/movies', (req, res ,next)=>{
   //find all celebs
   MoviesModel.find()
@@ -44,7 +47,7 @@ router.post('/movies/create', (req, res ,next)=>{
   });
  })
 
-  //movie details
+  //GET--movie details
    router.get('/movies/:id', (req,res,next)=>{
     const {id } = req.params
 
@@ -75,7 +78,7 @@ router.get('/movies/:id/edit', (req, res, next) => {
   });
 });
 
-//DELETE
+//POST--DELETE
 router.post('/movies/:id/delete', (req, res, next)=>{
 
   const {id} = req.params
