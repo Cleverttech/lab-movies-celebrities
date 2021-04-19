@@ -17,11 +17,11 @@
   <div class="input-group-prepend">
     <label class="input-group-text" for="inputGroupSelect01">Cast</label>
   </div>
-  <select class="custom-select" id="inputGroupSelect01" name="cast" multiple>
+  <select class="custom-select" id="cast" name="cast" multiple>
     <option selected>Choose...</option>
-    {{!-- <option value="1">{{this.name}}</option> --}}
-   {{#each data}}
-    <option value="{{this.name}}">{{this.name}}</option>
+
+   {{#each cast}}
+    <option value={{this._id}}>{{this.name}}</option>
    {{/each}}
   
 

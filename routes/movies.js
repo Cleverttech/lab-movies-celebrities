@@ -1,16 +1,16 @@
 const router = require("express").Router();
 
 const MoviesModel = require('../models/movies.model')
-const CelebrityModel = require('../models/Celebrity.model')
+const CelebritiesModel = require('../models/Celebrity.model')
+
 
 router.get('/movies/create', (req, res, next)=>{
 
-  CelebrityModel.find()
- .then((data) => {
-   console.log(data)
-  res.render('movies/new-movie.hbs', {data})
+  CelebritiesModel.find()
+ .then((cast) => {
+  res.render('movies/new-movie.hbs', { cast })
  }).catch((err) => {
-   
+  
  });
 
 })
@@ -22,32 +22,58 @@ router.post('/movies/create', (req, res ,next)=>{
 
     //create data
     MoviesModel.create({title, genre, plot, cast})
-    .then((data) => {
-     console.log('data created')
+    .then(() => {
       res.redirect('/movies')
     }).catch((err) => {
       console.log(err)
-     res.render('movies/new-movie')
+     res.redirect('movies/new-movie')
     });
-   
+    console.log(cast)
+   })
+
+ //movies-list
+ router.get('/movies', (req, res ,next)=>{
+  //find all celebs
+  MoviesModel.find()
+  .then((data) => {
+ 
+   res.render('movies/movies.hbs', {data})
+    
+  }).catch((err) => {
+   console.log(err)
+  });
+ })
+
+  //movie details
+   router.get('/movies/:id', (req,res,next)=>{
+    const {id } = req.params
+
+    MoviesModel.findById(id)
+    .populate('cast')
+    .then((movies) => {
+     console.log(movies)
+      res.render('movies/movie-details.hbs', {movies})
+    }).catch((err) => {
+      console.log(err)
+    
+    });
+
    })
 
 
-router.get('/movies', (req, res ,next)=>{
- //find all celebs
- MoviesModel.find()
- .then((data) => {
 
-  res.render('movies/movies.hbs', {data})
-   
- }).catch((err) => {
-  console.log(err)
- });
+
+
+router.post('/movies/:id/delete', (req, res, next)=>{
+
+  const {id} = req.params
+  MoviesModel.findByIdAndRemove(id)
+  .then(() => {
+    
+    res.redirect('/movies')
+  }).catch((err) => {
+    
+  });
+
 })
-
-
-
-// router.post('movies/create', (req, res, next)=>{
-
-// })
 module.exports = router;

@@ -5,17 +5,13 @@ const moviesSchema = new Schema(
   {
     title: String,
     genre: String,
-    plot: String
-  },
-  {
-  cast : {
-    type: Array,
-    userId: {
+    plot: String,
+    cast :[{
       type: Schema.Types.ObjectId,
-      ref: 'celebrities' // defines which collection its coming from
-    }
-  }
+      ref: 'celebrities'
+    }]
   },
+  
   {
     timestamps: true
   }

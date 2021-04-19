@@ -1,0 +1,20 @@
+<h1>Movie Details</h1>
+
+<div class="col-lg-2 col-md-4">
+<h2>{{movies.title}}</h2>
+<p>{{movies.genre}}</p>
+<p>{{movies.plot}}</p>
+
+
+{{#each movies.cast}}
+  <p>name:{{this.name}}</p>
+  <p>occupation:{{this.occupation}}</p>
+  <p>catch phrase:{{this.catchPhrase}}</p>
+{{/each}}
+
+<form action="/movies/{{movies.id}}/delete" method="post">
+
+<button class= "btn btn-danger" >Delete</button>
+</form>
+
+</div>
