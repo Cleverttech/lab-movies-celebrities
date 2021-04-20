@@ -75,9 +75,22 @@ router.get('/movies/:id/edit', (req, res, next) => {
   })
   .catch((err) => {
    console.log(err) 
-  });
+  })
+ 
 });
 
+//UPDATE--POST
+router.post('/movies/:id/edit', (req, res, next) => {
+  const {id} = req.params;
+  const {title, genre, plot} = req.body
+ MoviesModel.findByIdAndUpdate(id, {title, genre, plot})
+  .then(() => {
+    res.redirect('/movies')
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
 
 //POST--DELETE
 router.post('/movies/:id/delete', (req, res, next)=>{

@@ -1,6 +1,6 @@
 <h2>Create a new movie</h2>
 
-<form action="/movies/create" method="post">
+<form action="/movies/{{movie.id}}/edit" method="post">
   <div class="mb-3">
     <label class="form-label" >Title</label>
     <input type="text" class="form-control" name="title" value="{{movie.title}}">
@@ -20,7 +20,7 @@
   <select class="custom-select" id="cast" name="cast" multiple>
     <option selected>Choose...</option>
 
-   {{#each cast}}
+ {{#each cast}}
     <option value={{this._id}}>{{this.name}}</option>
    {{/each}}
   
@@ -29,5 +29,5 @@
 </div>
 
 {{!-- button --}}
-<button type="submit" class="btn btn-primary">Create</button>
+<button type="submit" class="btn btn-primary">Edit</button>
 </form>
